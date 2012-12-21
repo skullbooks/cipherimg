@@ -12,12 +12,13 @@ echo '<h1>CIPHERimg</h1>';
 
 $splitArray = array();
 
-$width = 10;
-$height = 10;
-
 $source = @imagecreatefromjpeg( "../images/uploaded/test.jpg" );
 $source_width = imagesx( $source );
 $source_height = imagesy( $source );
+
+$width = ceil($source_width/100);
+$height = ceil($source_height/100);
+
 $source_x = ceil($source_width / $width);
 $source_y = ceil($source_height / $height);
 
@@ -41,12 +42,12 @@ for( $x = 0; $x < $source_x; $x++)
 
 shuffle($splitArray);
 
-$newImage = imagecreatetruecolor($source_width, $source_height);
+$newImage = imagecreatetruecolor($source_x*$width, $source_y*$height);
 
 $newX = 0;
 $newY = 0;
 
-$html = '<style type="text/css">#test { width: '.$source_width.'px; height: '.$source_height.'px; position: relative; } #test div { position: absolute; width: '.$width.'px; height: '.$height.'px; background-image: url(http://cncws2.dev.diloc.de/git/cipherimg/images/download/test.png); }</style><div id="test">';
+$html = '<style type="text/css">#test { width: '.$source_width.'px; height: '.$source_height.'px; position: relative; overflow: hidden; } #test div { position: absolute; width: '.$width.'px; height: '.$height.'px; background-image: url(http://cncws2.dev.diloc.de/git/cipherimg/images/download/test.png); }</style><div id="test">';
 
 foreach ($splitArray as $split)
 {
